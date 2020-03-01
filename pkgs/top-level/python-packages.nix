@@ -3158,6 +3158,8 @@ in {
 
   regional = callPackage ../development/python-modules/regional { };
 
+  ratelimit = callPackage ../development/python-modules/ratelimit { };
+
   ratelimiter = callPackage ../development/python-modules/ratelimiter { };
 
   pywatchman = callPackage ../development/python-modules/pywatchman { };
