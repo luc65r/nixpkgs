@@ -5015,6 +5015,8 @@ in
 
   mandoc = callPackage ../tools/misc/mandoc { };
 
+  mangohud = callPackage ../tools/system/mangohud { };
+
   marktext = callPackage ../applications/misc/marktext { };
 
   mawk = callPackage ../tools/text/mawk { };
