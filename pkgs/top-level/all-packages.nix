@@ -1220,6 +1220,8 @@ in
 
   bindfs = callPackage ../tools/filesystems/bindfs { };
 
+  birch = callPackage ../applications/networking/irc/birch { };
+
   birdtray = libsForQt5.callPackage ../applications/misc/birdtray { };
 
   bitbucket-cli = python2Packages.bitbucket-cli;
