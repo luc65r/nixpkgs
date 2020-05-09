@@ -812,6 +812,8 @@ in
 
   bitwarden-rofi = callPackage ../tools/security/bitwarden-rofi { };
 
+  bitwarden-pyro = python3Packages.callPackage ../tools/security/bitwarden-pyro { };
+
   bitwarden_rs = callPackage ../tools/security/bitwarden_rs {
     inherit (darwin.apple_sdk.frameworks) Security CoreServices;
   };
