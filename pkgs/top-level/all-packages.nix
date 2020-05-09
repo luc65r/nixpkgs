@@ -810,6 +810,8 @@ in
 
   inherit (nodePackages) bitwarden-cli;
 
+  bitwarden-rofi = callPackage ../tools/security/bitwarden-rofi { };
+
   bitwarden_rs = callPackage ../tools/security/bitwarden_rs {
     inherit (darwin.apple_sdk.frameworks) Security CoreServices;
   };
