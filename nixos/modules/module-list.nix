@@ -882,6 +882,7 @@
   ./services/ttys/gpm.nix
   ./services/ttys/kmscon.nix
   ./services/wayland/cage.nix
+  ./services/wayland/greetd.nix
   ./services/video/epgstation/default.nix
   ./services/video/mirakurun.nix
   ./services/web-apps/atlassian/confluence.nix
