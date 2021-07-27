@@ -14337,6 +14337,10 @@ in
 
   c2ffi = callPackage ../development/tools/misc/c2ffi { };
 
+  c2c = callPackage ../development/compilers/c2c {
+    llvmPackages = llvmPackages_11;
+  };
+
   swfmill = callPackage ../tools/video/swfmill { };
 
   swftools = callPackage ../tools/video/swftools {
