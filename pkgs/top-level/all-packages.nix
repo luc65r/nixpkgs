@@ -14341,6 +14341,10 @@ in
     llvmPackages = llvmPackages_11;
   };
 
+  c3c = callPackage ../development/compilers/c3c {
+    llvmPackages = llvmPackages_11;
+  };
+
   swfmill = callPackage ../tools/video/swfmill { };
 
   swftools = callPackage ../tools/video/swftools {
