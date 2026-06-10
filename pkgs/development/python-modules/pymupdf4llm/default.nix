@@ -2,31 +2,44 @@
   lib,
   buildPythonPackage,
   fetchFromGitHub,
+  pipcl,
   setuptools,
   pymupdf,
+  pymupdf-layout,
   tabulate,
+
+  withPymupdfLayout ? true,
 }:
 
 buildPythonPackage (finalAttrs: {
   pname = "pymupdf4llm";
-  version = "0.3.4";
+  version = "1.27.2.3";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "pymupdf";
-    repo = "RAG";
-    tag = "v${finalAttrs.version}";
-    hash = "sha256-SgJ47jkE6GcSXVsOMOx8Hm+Ce6pCAjLEhdxGeJEu6DQ=";
+    repo = "pymupdf4llm";
+    tag = finalAttrs.version;
+    hash = "sha256-HpIo9Jwi3M6IHqT/PC+tdi+YSsyevF+INbv0Utjb9sQ=";
   };
 
-  sourceRoot = "${finalAttrs.src.name}/pymupdf4llm";
-
-  build-system = [ setuptools ];
+  build-system = [
+    pipcl
+    setuptools
+  ];
 
   dependencies = [
     pymupdf
     tabulate
-  ];
+  ] ++ lib.optional withPymupdfLayout pymupdf-layout;
+
+  postPatch = ''
+    sed -i "1i from pathlib import Path" setup.py
+    substituteInPlace setup.py \
+      --replace-fail "pipcl.git_items('src')" "map(lambda p: p.relative_to('src'), Path('src').rglob('*.py'))"
+  '' + lib.optionalString (!withPymupdfLayout) ''
+    sed -i "/pymupdf_layout/d" setup.py
+  '';
 
   checkPhase = ''
     runHook preCheck
@@ -52,8 +65,8 @@ buildPythonPackage (finalAttrs: {
 
   meta = {
     description = "PyMuPDF Utilities for LLM/RAG - converts PDF pages to Markdown format for Retrieval-Augmented Generation";
-    homepage = "https://github.com/pymupdf/RAG";
-    changelog = "https://github.com/pymupdf/RAG/blob/${finalAttrs.src.tag}/CHANGES.md";
+    homepage = "https://github.com/pymupdf/pymupdf4llm";
+    changelog = "https://github.com/pymupdf/pymupdf4llm/blob/${finalAttrs.src.tag}/CHANGES.md";
     license = lib.licenses.agpl3Only;
     maintainers = with lib.maintainers; [ ryota2357 ];
   };
